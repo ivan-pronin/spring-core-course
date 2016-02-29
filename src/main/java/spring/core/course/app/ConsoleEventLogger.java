@@ -1,10 +1,10 @@
 package spring.core.course.app;
 
-public class ConsoleEventLogger
+public class ConsoleEventLogger implements EventLogger
 {
 
-    public void logEvent(String msg)
+    public void logEvent(Event event)
     {
-        System.out.println("Logging: " + msg);
+        System.out.println(event);
     }
 }
