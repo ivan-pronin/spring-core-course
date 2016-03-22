@@ -31,7 +31,7 @@ public class FileEventLogger implements IEventLogger
         }
     }
 
-    private void init() throws IOException
+    protected void init() throws IOException
     {
         Path p = Paths.get(fileName);
         if (Files.exists(p))

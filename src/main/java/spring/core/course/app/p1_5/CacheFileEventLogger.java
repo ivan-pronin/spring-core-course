@@ -1,5 +1,6 @@
 package spring.core.course.app.p1_5;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,12 @@ public class CacheFileEventLogger extends FileEventLogger
         super(fileName);
     }
 
-    @Override
+    public CacheFileEventLogger(String fileName, int cacheSize) {
+		super(fileName);
+		this.cacheSize = cacheSize;
+	}
+
+	@Override
     public void logEvent(Event event)
     {
         cache.add(event);
@@ -27,6 +33,11 @@ public class CacheFileEventLogger extends FileEventLogger
     public void destroy()
     {
         writeEventsFromCache();
+    }
+    
+    protected void init() throws IOException
+    {
+    	super.init();
     }
 
     private void writeEventsFromCache()

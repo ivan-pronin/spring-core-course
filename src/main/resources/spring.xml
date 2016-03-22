@@ -32,8 +32,9 @@
 	</bean>
 
 	<bean id="cacheFileEventLogger" class="spring.core.course.app.p1_5.CacheFileEventLogger"
-		destroy-method="destroy" parent="fileEventLogger">
-		<constructor-arg index="0" type="java.lang.String" value="log_cached.txt" />
+		init-method="init" destroy-method="destroy">
+		<constructor-arg index="0" value="log_cached.txt" />
+		<constructor-arg index="1" value="5" />
 	</bean>
 
 </beans>
