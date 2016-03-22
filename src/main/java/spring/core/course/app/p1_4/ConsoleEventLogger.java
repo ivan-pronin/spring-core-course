@@ -1,4 +1,4 @@
-package spring.core.course.app;
+package spring.core.course.app.p1_4;
 
 public class ConsoleEventLogger implements EventLogger
 {

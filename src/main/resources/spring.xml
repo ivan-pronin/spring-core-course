@@ -5,25 +5,35 @@
  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-	<bean id="client" class="spring.core.course.app.Client">
+	<bean id="client" class="spring.core.course.app.p1_5.Client">
 		<constructor-arg value="1" />
 		<constructor-arg value="John Smith" />
 	</bean>
 
-	<bean id="eventLogger" class="spring.core.course.app.ConsoleEventLogger" />
+	<bean id="eventLogger" class="spring.core.course.app.p1_5.ConsoleEventLogger" />
 
-	<bean id="app" class="spring.core.course.app.App">
+	<bean id="app" class="spring.core.course.app.p1_5.App">
 		<constructor-arg ref="client" />
-		<constructor-arg ref="eventLogger" />
+		<constructor-arg ref="cacheFileEventLogger" />
 	</bean>
 
-	<bean id="event" class="spring.core.course.app.Event" scope="prototype">
+	<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance" />
+
+	<bean id="event" class="spring.core.course.app.p1_5.Event" scope="prototype">
 		<constructor-arg>
 			<bean class="java.util.Date" />
 		</constructor-arg>
 		<constructor-arg ref="dateFormat" />
 	</bean>
 
-	<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance" />
+	<bean id="fileEventLogger" class="spring.core.course.app.p1_5.FileEventLogger"
+		init-method="init">
+		<constructor-arg value="log.txt" />
+	</bean>
+
+	<bean id="cacheFileEventLogger" class="spring.core.course.app.p1_5.CacheFileEventLogger"
+		destroy-method="destroy" parent="fileEventLogger">
+		<constructor-arg index="0" type="java.lang.String" value="log_cached.txt" />
+	</bean>
 
 </beans>
